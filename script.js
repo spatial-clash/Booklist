@@ -1,34 +1,33 @@
-function compute()
+function search()
 {
-    var principal = document.getElementById("principal").value;
-    var rate = document.getElementById("rate").value;
-    var years = document.getElementById("years").value;
-    var interest = principal * years * rate / 100;
-    var year = new Date().getFullYear()+parseInt(years);
-    //document.getElementById("result").innerHTML = "Result: Interest paid "+interest+" at a rate of "+rate+"% over "+years+" Year(s), ending in "+year+"";
-    document.getElementById("result").innerHTML = "Interest paid: ";
-    document.getElementById("interest").innerHTML = interest;
-    document.getElementById("srate").innerHTML = "at a rate of: ";
-    document.getElementById("percentage").innerHTML = rate;
-    document.getElementById("syears").innerHTML = "for ";
-    document.getElementById("syear").innerHTML = years;
-    document.getElementById("syearss").innerHTML = " year(s)";
-    document.getElementById("sdate").innerHTML = "ending in: ";
-    document.getElementById("sdates").innerHTML = year;
+    var author = document.getElementById("lastname").value;
+    //document.getElementById("list").innerHTML = author;
+    function author ();
+    
 }
-function updateRate() 
-{
-    var rateval = document.getElementById("rate").value;
-    document.getElementById("rate_val").innerText=rateval;
-}  
+
+function author(){
+    connectToURL('https://reststop.randomhouse.com/resources/works/?expandLevel=1&search=King').catch(err=>console.log(err.toString()));
+    const axios = require('axios').default;
+    const connectToURL = async(url)=>{
+        const outcome = axios.get(url);
+        let listOfWork = (await outcome).data.work;
+        listOfWork.forEach((work)=>{
+            resultlist = (work.titleAuth);
+        });
+    }
+    document.getElementById("list").innerHTML = resultlist
+}
+
+ 
 function validatep() {
-    var principal = document.getElementById("principal").value;
-    if (Math.sign(principal) > 0) {
+    var principal = document.getElementById("lastname").value;
+    if (author !="") {
         return true;
     } 
     else {
-        alert("Please enter a postive non-zero number")
-        document.getElementById("principal").focus();
+        alert("Please Enter a Last Name")
+        document.getElementById("author").focus();
         return false;
     }
   }
